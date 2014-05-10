@@ -5,23 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/vendor/jquery.mobile/jquery.mobile-1.3.2.min.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
+    <script src="/static/vendor/jquery/jquery-1.10.1.min.js"></script>
     <!-- tinymap -->
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="/static/vendor/jQuery-tinyMap/jquery.tinyMap.min.js"></script>
-    <!-- tinmap -->
-    <script src="/static/vendor/jquery/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
+    <script src="/static/vendor/jQuery-tinyMap/jquery.tinyMap.js"></script>
+    <!-- tinymap -->
     <script type="text/javascript">
     $(document).bind("mobileinit", function(){
 //        $.mobile.defaultPageTransition = 'slide';
     });
     </script>
     <script src="/static/vendor/jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
-    <script type="text/javascript">
-    $(function () {
-        $('#map').tinyMap();
-    });
-    </script>
     {% block head %}
     {% endblock %}
 </head>
