@@ -1484,7 +1484,7 @@ div.ui-mobile-viewport {
 	border-width: 0;
 	overflow: visible;
 	overflow-x: hidden;
-	padding: 1em;
+	padding: 0.2em;
 }
 /* Corner styling for dialogs and popups */
 .ui-corner-all > .ui-header:first-child,
@@ -4695,4 +4695,8 @@ html .ui-popup .ui-field-contain > label + .ui-flipswitch {
 .ui-tabs {
 	position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
 	padding: .2em;
+}
+.controlgroup-textinput {
+	padding-top:.22em;
+	padding-bottom:.22em;
 }
