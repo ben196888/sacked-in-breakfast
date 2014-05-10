@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div data-role="header">
+    <h1>編輯店家</h1>
+</div>
+
+<div data-role="content">
+    <h3>{{name}}</h3>
+    <hr>
+    <form id="editForm" method="post" action="/editShop/{{sid}}">
+        <label for="news">報紙</label>
+        <input type="text" name="news" value="{% if c_info['news'] %}{{c_info['news']}}{% endif %}">
+        <label for="tv">電視</label>
+        <input type="text" name="tv" value="{% if c_info['tv'] %}{{c_info['tv']}}{% endif %}">
+        <input data-role="button" data-theme="b" data-icon="check" type="submit" value="Submit">
+    </form>
+</div>
+{% endblock %}

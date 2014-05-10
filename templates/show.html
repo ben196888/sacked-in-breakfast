@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div data-role="header">
+    <h1>店家</h1>
+    <a>edit</a>
+</div>
+
+<div data-role="content">
+    <h3>{{sid}}-{{shop['name']}}</h3>
+    <h4>{{shop['address']}}</h4>
+    <hr>
+    {% if not c_info %}
+    <a data-role="button">新增資料</a>
+    {% else %}
+    <ul data-role="listview" data-inset="true">
+        {% if c_info['news'] %}
+        <li>報紙-{{c_info['news']}}</li>
+        {% endif %}
+        {% if c_info['tv'] %}
+        <li>電視-{{c_info['tv']}}</li>
+        {% endif %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}
