@@ -1,5 +1,35 @@
 {% extends "base.html" %}
 
+{% block head %}
+    <script>
+    var x=document.getElementById("demo");
+    function getLocation()
+    {
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        else{x.innerHTML="Geolocation is not supported by this browser.";}
+    }
+    function showPosition(position)
+    {
+        x.innerHTML="Latitude: " + position.coords.latitude + 
+        "<br>Longitude: " + position.coords.longitude;    
+    }
+
+    $(function () {
+        $('#map').tinyMap({
+            //center: '臺灣',
+            center: {x:25.019338218051804, y:121.54169423502667},
+            zoom: 18,
+            marker: [
+                {addr: ['25.019338218051804', '121.54169423502667'], text: 'now'}
+            ]
+        });
+    });
+    </script>
+{% endblock %}
+
 {% block content %}
 <div data-role="header">
     <h1>早餐店</h1>
@@ -7,7 +37,8 @@
 </div>
 
 <div data-role="content">
-    <div id="map"> Map </div>
-
+    <input id="address_search" type="search" data-clear-button="true" name="search" value="" />
+    <a href="/search" data-inline="true" data-mini="true" data-role="button" data-icon="search">submit</a>
+    <div id="map"></div>
 </div>
 {% endblock %}
