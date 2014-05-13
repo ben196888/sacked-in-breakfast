@@ -56,10 +56,7 @@ class AddShop():
         shops = DB.shops
         if name and address:
             if not shops.find_one({'addr':address}):
-                #global g_sid
-                g_sid = 1
-                sid = g_sid
-                g_sid = g_sid + 1
+                sid = shops.count() + 1
                 s = {'sid':sid, 'addr':address, 'name':name}
                 shops.insert(s)
                 raise web.redirect('/edit/%d' % sid)
