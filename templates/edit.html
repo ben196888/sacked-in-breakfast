@@ -2,15 +2,32 @@
 
 {% block content %}
 <div data-role="header">
+    <a href="/" data-icon="home" class="ui-btn-left">Home</a>
     <h1>編輯店家</h1>
 </div>
 
 <div data-role="content">
-    <h3>{{name}}</h3>
+    <h3>{{sid}}-{{name}}</h3>
     <hr>
     <form id="editForm" method="post" action="/editShop/{{sid}}">
         <label for="news">報紙</label>
         <input type="text" name="news" value="{% if c_info['news'] %}{{c_info['news']}}{% endif %}">
+<!--
+        <fieldset data-role="collapsible">
+            <legend>報紙</legend>
+            <div data-role="controlgroup">
+                <input type="checkbox" name="paper-1" id="paper-1">
+                <label for="paper-1">中國時報</label>
+                <input type="checkbox" name="paper-2" id="paper-2">
+                <label for="paper-2">聯合報</label>
+                <input type="checkbox" name="paper-3" id="paper-3">
+                <label for="paper-3">蘋果日報</label>
+                <input type="checkbox" name="paper-4" id="paper-4">
+                <label for="paper-4">自由時報</label>
+                <input type="checkbox" name="paper-5" id="paper-5">
+                <label for="paper-5">其他</label>
+            </div>
+        </fieldset> -->
         <label for="tv">電視</label>
         <input type="text" name="tv" value="{% if c_info['tv'] %}{{c_info['tv']}}{% endif %}">
         <input data-role="button" data-theme="b" data-icon="check" type="submit" value="Submit">

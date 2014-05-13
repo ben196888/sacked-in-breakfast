@@ -19,7 +19,8 @@ app = web.application(urls, globals())
 
 class Index():
     def GET(self):
-        return render_template('index.html')
+        shops = DB.shops
+        return render_template('index.html', shops=shops.find())
 
 class ShowShop():
     def GET(self, sid):

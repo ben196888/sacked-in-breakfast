@@ -2,16 +2,17 @@
 
 {% block content %}
 <div data-role="header">
+    <a href="/" data-icon="home" class="ui-btn-left">Home</a>
     <h1>店家</h1>
-    <a>edit</a>
+    <a href="/edit/{{sid}}" data-icon="edit" class="ui-btn-right">edit</a>
 </div>
 
 <div data-role="content">
-    <h3>{{sid}}-{{shop['name']}}</h3>
-    <h4>{{shop['address']}}</h4>
+    <h3>{{sid}} - {{shop['name']}}</h3>
+    <h5>{{shop['addr']}}</h5>
     <hr>
     {% if not c_info %}
-    <a data-role="button">新增資料</a>
+    <a href="/edit/{{sid}}" data-role="button">新增資料</a>
     {% else %}
     <ul data-role="listview" data-inset="true">
         {% if c_info['news'] %}

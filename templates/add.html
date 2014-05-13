@@ -2,10 +2,13 @@
 
 {% block content %}
 <div data-role="header">
+    <a href="/" data-icon="home" class="ui-btn-left">Home</a>
     <h1>新增店家</h1>
 </div>
 
 <div data-role="content">
+    <h3>新增店家資料</h3>
+    <hr>
     <form id="addForm" method="post" action="/addShop">
         <label for="name">店名</label>
         <input type="text" name="name">

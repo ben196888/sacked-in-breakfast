@@ -24,16 +24,32 @@
 
     $(function () {
         $('#map').tinyMap({
-            //center: '臺灣',
-            //zoom: 7
-            center: {x:25.019338218051804, y:121.54169423502667},
-            zoom: 18,
-            marker: [
-                {addr: ['25.019338218051804', '121.54169423502667'], text: 'now'}
-            ]
+            center: '臺灣',
+            zoom: 7
+            //center: {x:25.019338218051804, y:121.54169423502667},
+            //zoom: 18,
+            //marker: [
+            //    {addr: ['25.019338218051804', '121.54169423502667'], text: 'now'}
+            //]
         });
     });
     </script>
+    <script>
+        $('#shop_list').listview('refresh');
+        function address_search(e){
+            $("#address_list").html("");
+            var search_text = $(e.target).val();
+            $.post("./add_card", $(e.target).val()).done(function(data){
+                var monsters = [];
+                $.each(data, function(key, monster){
+                    monsters.push('<li><a href="' + window.location.pathname + '?target=' + key + '"><div class="card-' + key + '" stlye="float: left;"></div>' + key + ' - ' + monster.n + '</a></li>');
+                });
+                $("#monster_list").append(monsters);
+                $('#monster_list').listview('refresh');
+            });
+        }
+    </script>
+</script>
 {% endblock %}
 
 {% block content %}
@@ -43,10 +59,21 @@
 </div>
 
 <div data-role="content">
+    <input id="shop_search" type="search" name="search" value="" />
+    <div id="map"></div>
+    <ul id="shop_list" data-role="listview" data-inset="true">
+        {% for s in shops %}
+        <li><a href="/{{s.sid}}">{{s.sid}} - {{s.name}}</a></li>
+        {% endfor %}
+    </ul>
+    <!--
+    <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="c" data-inline="true">add</a>
+    
     <div data-role="controlgroup" data-type="horizontal">
         <input id="address_search" data-wrapper-class="controlgroup-textinput ui-btn" type="search" name="search" value="" />
-        <button>sub</button>
+        <a href="#" data-role="button" data-icon="add"></a>
     </div>
-    <div id="map"></div>
+
+    -->
 </div>
 {% endblock %}
