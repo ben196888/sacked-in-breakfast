@@ -7,34 +7,50 @@
     <script src="/static/vendor/jquery.tinyMap.min.js"></script>
     <!-- tinymap -->
     <script>
-    var x=document.getElementById("demo");
-    function getLocation()
+    var event_timer;
+
+    function get_location(e)
     {
         if (navigator.geolocation)
         {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(function showPosition(position)
+            {
+                var lat = position.coords.latitude;
+                var lng = position.coords.longitude;
+                var loc = {x: lat, y: lng};
+                //$('#demo').append(loc);
+                $('#map').tinyMap('clear', ['marker']);
+                $('#map').tinyMap('panto', loc);
+                $('#map').tinyMap('modify', {
+                    zoom: 17,
+                    marker: [{addr: [lat, lng], text:'現在位置'}]
+                });
+            });
         }
-        else{x.innerHTML="Geolocation is not supported by this browser.";}
+        else
+        {
+            var text="Geolocation is not supported by this browser.";
+            //$('#demo').append(text);
+        }
     }
-    function showPosition(position)
-    {
-        x.innerHTML="Latitude: " + position.coords.latitude + 
-        "<br>Longitude: " + position.coords.longitude;    
-    }
+
+    $(function(){
+            $("body").on("click", ".get_location", function(e){
+                if (event_timer){
+                    clearTimeout(event_timer);
+                }
+                event_timer = setTimeout(function(){get_location(e);}, 100);
+            });
+    })
 
     $(function () {
         $('#map').tinyMap({
             center: '臺灣',
             zoom: 7
-            //center: {x:25.019338218051804, y:121.54169423502667},
-            //zoom: 18,
-            //marker: [
-            //    {addr: ['25.019338218051804', '121.54169423502667'], text: 'now'}
-            //]
         });
     });
     </script>
-    <script>
+    <!--<script>
         $('#shop_list').listview('refresh');
         function address_search(e){
             $("#address_list").html("");
@@ -48,7 +64,7 @@
                 $('#monster_list').listview('refresh');
             });
         }
-    </script>
+    </script>-->
 </script>
 {% endblock %}
 
@@ -60,6 +76,8 @@
 
 <div data-role="content">
     <input id="shop_search" type="search" name="search" value="" />
+    <a href="#" class="get_location" data-role="button" data-inline="true">Get location</a>
+    <div id="demo"></div>
     <div id="map"></div>
     <ul id="shop_list" data-role="listview" data-inset="true">
         {% for s in shops %}
