@@ -1,55 +1,6 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <!-- tinymap -->
-    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
-    <script src="/static/vendor/jquery.tinyMap.min.js"></script>
-    <!-- tinymap -->
-    <script>
-    var event_timer;
-
-    function get_location(e)
-    {
-        if (navigator.geolocation)
-        {
-            navigator.geolocation.getCurrentPosition(function showPosition(position)
-            {
-                var lat = position.coords.latitude;
-                var lng = position.coords.longitude;
-                var loc = {x: lat, y: lng};
-                //$('#demo').append(loc);
-                $('#map').tinyMap('clear', ['marker']);
-                $('#map').tinyMap('panto', loc);
-                $('#map').tinyMap('modify', {
-                    zoom: 17,
-                    marker: [{addr: [lat, lng], text:'現在位置'}]
-                });
-            });
-        }
-        else
-        {
-            var text="Geolocation is not supported by this browser.";
-            //$('#demo').append(text);
-        }
-    }
-
-    $(function(){
-            $("body").on("click", ".get_location", function(e){
-                if (event_timer){
-                    clearTimeout(event_timer);
-                }
-                event_timer = setTimeout(function(){get_location(e);}, 100);
-            });
-    })
-
-    $(function () {
-        $('#map').tinyMap({
-            center: '臺灣',
-            zoom: 7
-        });
-    });
-    </script>
     <!--<script>
         $('#shop_list').listview('refresh');
         function address_search(e){
@@ -70,13 +21,13 @@
 
 {% block content %}
 <div data-role="header">
+    <a href="/add" data-icon="plus" class="ui-btn-left">新增</a>
     <h1>早餐店</h1>
-    <a href="/add" data-icon="plus" class="ui-btn-right">新增</a>
+    <a href="#" class="ui-btn-right get_location" data-icon="home">定位</a>
 </div>
 
 <div data-role="content">
     <input id="shop_search" type="search" name="search" value="" />
-    <a href="#" class="get_location" data-role="button" data-inline="true">Get location</a>
     <div id="demo"></div>
     <div id="map"></div>
     <ul id="shop_list" data-role="listview" data-inset="true">
